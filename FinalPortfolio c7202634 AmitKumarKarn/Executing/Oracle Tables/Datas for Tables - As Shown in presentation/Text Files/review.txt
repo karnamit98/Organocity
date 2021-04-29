@@ -1,0 +1,28 @@
+DROP TABLE REVIEW CASCADE CONSTRAINTS;
+DROP SEQUENCE REVIEW_sequence;
+
+CREATE TABLE REVIEW(
+	review_id INTEGER NOT NULL,
+	review_date date,
+	rating INTEGER,
+	review_description VARCHAR(500),
+	product_id INTEGER,
+	user_id INTEGER,
+	CONSTRAINT PK_REVIEW PRIMARY KEY (review_id),
+	FOREIGN KEY (product_id) REFERENCES PRODUCT (product_id),
+	FOREIGN KEY (user_id) REFERENCES USERS (user_id)
+);
+
+
+CREATE SEQUENCE REVIEW_sequence;
+
+
+CREATE OR REPLACE TRIGGER REVIEW_on_insert
+  BEFORE INSERT ON REVIEW
+  FOR EACH ROW
+BEGIN
+  SELECT REVIEW_sequence.nextval
+  INTO :new.review_id
+  FROM dual;
+END;
+/

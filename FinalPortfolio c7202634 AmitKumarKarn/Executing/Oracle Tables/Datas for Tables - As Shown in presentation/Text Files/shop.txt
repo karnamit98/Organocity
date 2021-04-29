@@ -1,0 +1,23 @@
+DROP TABLE SHOP CASCADE CONSTRAINTS;
+DROP SEQUENCE SHOP_sequence;
+
+CREATE TABLE SHOP(
+	shop_id INTEGER NOT NULL,
+	shop_name VARCHAR(50),
+	shop_location VARCHAR(50),
+	trader_id INTEGER,
+	CONSTRAINT PK_SHOP PRIMARY KEY (shop_id),
+	FOREIGN KEY (trader_id) REFERENCES USERS (user_id)
+);
+
+CREATE SEQUENCE SHOP_sequence;
+
+CREATE OR REPLACE TRIGGER SHOP_on_insert
+  BEFORE INSERT ON SHOP
+  FOR EACH ROW
+BEGIN
+  SELECT SHOP_sequence.nextval
+  INTO :new.shop_id
+  FROM dual;
+END;
+/

@@ -1,0 +1,30 @@
+DROP TABLE ORDERS CASCADE CONSTRAINTS;
+DROP SEQUENCE ORDERS_sequence;
+
+
+CREATE TABLE ORDERS(
+	invoice_no INTEGER NOT NULL,
+	order_status VARCHAR(50),
+	order_date TIMESTAMP,
+	user_id INTEGER,
+	slot_no INTEGER,
+    collection_date DATE,
+	payment_id INTEGER,
+	CONSTRAINT PK_ORDERS PRIMARY KEY (invoice_no),
+	FOREIGN KEY (user_id) REFERENCES USERS (user_id),
+	FOREIGN KEY (slot_no) REFERENCES COLLECTION_SLOT (slot_no),
+	FOREIGN KEY (payment_id) REFERENCES PAYMENT (payment_id)
+);
+
+
+CREATE SEQUENCE ORDERS_sequence;
+
+CREATE OR REPLACE TRIGGER ORDERS_on_insert
+  BEFORE INSERT ON ORDERS
+  FOR EACH ROW
+BEGIN
+  SELECT ORDERS_sequence.nextval
+  INTO :new.invoice_no
+  FROM dual;
+END;
+/

@@ -1,0 +1,8 @@
+"Column Name","Data Type","Nullable","Default","Primary Key"
+"INVOICE_NO","NUMBER","No","","1"
+"ORDER_STATUS","VARCHAR2(50)","Yes","",""
+"ORDER_DATE","TIMESTAMP(6)","Yes","",""
+"USER_ID","NUMBER","Yes","",""
+"SLOT_NO","NUMBER","Yes","",""
+"COLLECTION_DATE","DATE","Yes","",""
+"PAYMENT_ID","NUMBER","Yes","",""

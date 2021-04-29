@@ -1,0 +1,65 @@
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-top:0;
+}
+#header{
+    background-color: #379601 !important;
+    /*height : 50px;
+    width : 100%;
+    margin-top:0 !important;*/
+    
+}
+#header h2{
+    top: 13px ;
+    text-align: center;
+    color: white;
+    position : relative;
+}
+#shipStat p{
+    font-size: 40;
+    font-weight: lighter;
+    color: black;
+    text-align: center;
+}
+#shipStat hr{
+    width : 90%;
+    color: darkgray;
+}
+#message{
+    
+    width: 60%;
+    left: 20%;
+    position : relative;
+}
+.init a:hover{
+    text-decoration:none;
+    box-shadow:0 0 3px black;
+}
+#message select{
+   width:50%;float:left;margin-bottom:20px;
+   margin-left:0 !important;
+    height: 40px;
+    
+}
+button, .slotbtn{
+    height: 34px ;
+    font-size: 25;
+    background-color: black;
+    color: white;
+    border : none; 
+    border-radius: 0 0 !important;
+    
+}
+.banner{
+    width: 80%;
+    height: 400px ;
+    border : 2px solid black;
+    left: 10%;
+    position: relative;
+}
+@media (min-width: 700px)
+{
+    .main-cont{
+        width:40% !important;
+    }
+}

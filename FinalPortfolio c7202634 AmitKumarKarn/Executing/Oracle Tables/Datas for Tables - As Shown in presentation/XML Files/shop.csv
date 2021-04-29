@@ -1,0 +1,5 @@
+"Column Name","Data Type","Nullable","Default","Primary Key"
+"SHOP_ID","NUMBER","No","","1"
+"SHOP_NAME","VARCHAR2(50)","Yes","",""
+"SHOP_LOCATION","VARCHAR2(50)","Yes","",""
+"TRADER_ID","NUMBER","Yes","",""

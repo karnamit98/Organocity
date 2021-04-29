@@ -1,0 +1,75 @@
+Chicken :
+Product Type: Meat
+Name : Chicken
+Image: In the file below
+Description: Chicken is a domestical bird which is raised for meats and eggs. It is one of the most common and widespread domestic animals that’s less commonly used as pet.
+Allergy Description: People allergic to chicken may have symptoms of itchy, swollen or watery eyes and runny or itchy nose.
+
+Pork:
+Product Type: Meat
+Name: Pork
+Image: In the file below
+Description: Pork is the meat of domestic pork consumed worldwide which can be eaten both freshly cooked and preserved.
+Allergic Description: People allergic to pork have pork-cat syndrome which is a response to cat serum albumin that cross reacts with albumin in pork.
+
+Salmon:
+
+Product Type: Fish
+Name: Salmon
+Image: In the file below
+Description: Salmon is a commonly consumed fish praised for it’s high protein content and omega-3 fatty acids.
+Allergy Description: People allergic to salmon get skin rash, nausea, stomach cramps, indigestion, vomiting or diarrhea.
+
+Trout:
+Product Type: Fish
+Name: Trout
+Image: In the file below
+Description: Trout is one of the famous freshwater fish which is famous for it’s high content of potassium, protein and Omega-3 fatty acids.
+Allergic Description: The allergy symptoms to trout are nausea, stomach cramps, indigestion, vomiting or diarrhea.
+
+Cake :
+
+Product Type: Bakery
+Product Name: Cake
+Image: In the file below
+Description: Cake is a form if sweet food made from flour, sugar and other ingredients which is usually baked.
+Allergy Description: Preservatives found in some dried fruits and wines have sulphites and sulphur dioxides which are injurious to health.
+
+Bread :
+
+Product Type: Bakery
+Product Name: Bread
+Image: In the file below
+Description: Bread is a staple food prepared from a dough of flour and water usually by baking.
+Allergic Description: People might develop hives or a rash or get a stomachache with bread allergy.
+
+Apple:
+
+Product Type: Fruits And Vegetables
+Product Name: Apple
+Image: In the file below
+Description: Apple is one of the most common juicy fruits in the world which can be green red or yellow.
+Allergic Description: Most apple allergic patients notice itching of mouth and throat and redness or swelling of lips.
+
+Spinach:
+
+Product Type: Vegetables And Fruits
+Product Name: Spinach
+Image: In the file below
+Description: Spinach is a leafy herbaceous annual plant grown for its leaves which are used as a vegetable.
+Allergic Description: People allergic to spinach can have itchy skin, hives, abdominal cramps or skin rashes.
+
+Organic Momo:
+Product Type: Fastfood
+Product Name: Organic Wheat Momo
+Image: In the file below
+Description: Momo is a type of steamed filled dumpling popular among the Himalayan regions of South East Asia and made with wheat.
+Allergic Description: Wheat allergy symptoms include swelling, itching or irritation in mouth or throat.
+
+Organic Noodles:
+
+Product Type: Fastfood
+Product Name: Organic Wheat Noodles
+Image: In the file below
+Description: Noodles is a long and skinny piece of pasta which can be eaten with butter, cheese or bowl of soup.
+Allergic Description: Wheat allergy symptoms include swelling, itching or irritation in mouth or throat.

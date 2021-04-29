@@ -1,0 +1,7 @@
+"Column Name","Data Type","Nullable","Default","Primary Key"
+"PAYMENT_ID","NUMBER","No","","1"
+"PAYMENT_STATUS","VARCHAR2(50)","Yes","",""
+"PAYMENT_TYPE","VARCHAR2(50)","Yes","",""
+"PAYMENT_DATE_TIME","TIMESTAMP(6)","Yes","",""
+"PAYMENT_AMOUNT","FLOAT","Yes","",""
+"USER_ID","NUMBER","Yes","",""

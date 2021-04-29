@@ -1,0 +1,4 @@
+"Column Name","Data Type","Nullable","Default","Primary Key"
+"CAT_ID","NUMBER","No","","1"
+"CAT_NAME","VARCHAR2(50)","Yes","",""
+"CAT_IMAGE","VARCHAR2(50)","Yes","",""

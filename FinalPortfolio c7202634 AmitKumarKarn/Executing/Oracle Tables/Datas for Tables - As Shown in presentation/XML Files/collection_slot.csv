@@ -1,0 +1,5 @@
+"Column Name","Data Type","Nullable","Default","Primary Key"
+"SLOT_NO","NUMBER","No","","1"
+"SLOT_INFO","VARCHAR2(100)","Yes","",""
+"THIS_WEEK_ORDERS","NUMBER","Yes","",""
+"NEXT_WEEK_ORDERS","NUMBER","Yes","",""

@@ -1,0 +1,324 @@
+--Drop Tables--
+DROP TABLE USERS CASCADE CONSTRAINTS;
+DROP TABLE COLLECTION_SLOT CASCADE CONSTRAINTS;
+DROP TABLE CART CASCADE CONSTRAINTS;
+DROP TABLE PAYMENT CASCADE CONSTRAINTS;
+DROP TABLE CATEGORY CASCADE CONSTRAINTS;
+DROP TABLE SHOP CASCADE CONSTRAINTS;
+DROP TABLE PRODUCT CASCADE CONSTRAINTS;
+DROP TABLE DISCOUNT CASCADE CONSTRAINTS;
+DROP TABLE REVIEW CASCADE CONSTRAINTS;
+DROP TABLE ORDERS CASCADE CONSTRAINTS;
+DROP TABLE PRODUCT_CART CASCADE CONSTRAINTS;
+DROP TABLE ORDER_DETAILS CASCADE CONSTRAINTS;
+DROP TABLE TEMP_CHECKOUT CASCADE CONSTRAINTS;
+
+DROP SEQUENCE USERS_sequence;
+DROP SEQUENCE COLLECTION_SLOT_sequence;
+DROP SEQUENCE PAYMENT_sequence;
+DROP SEQUENCE CATEGORY_sequence;
+DROP SEQUENCE SHOP_sequence;
+DROP SEQUENCE PRODUCT_sequence;
+DROP SEQUENCE DISCOUNT_sequence;
+DROP SEQUENCE REVIEW_sequence;
+DROP SEQUENCE ORDERS_sequence;
+DROP SEQUENCE PRODUCT_CART_sequence;
+DROP SEQUENCE ORDER_DETAILS_sequence;
+DROP SEQUENCE TEMP_CHECKOUT_sequence;
+
+--Create Tables--
+
+CREATE TABLE USERS(	
+	user_id INTEGER NOT NULL,
+	username VARCHAR(50) NOT NULL,
+	user_type VARCHAR(50) NOT NULL,
+	added_by INTEGER,
+	fullname VARCHAR(100),
+	user_image VARCHAR(80),
+	user_contact LONG,
+	user_email VARCHAR(50) NOT NULL,
+	password VARCHAR(80) NOT NULL,
+    verification_status INTEGER,
+    trader_request INTEGER,
+	CONSTRAINT PK_USERS PRIMARY KEY (user_id),
+	FOREIGN KEY (added_by) REFERENCES USERS (user_id)
+);
+
+
+CREATE TABLE COLLECTION_SLOT(
+	slot_no INTEGER NOT NULL,
+	slot_info VARCHAR(100),
+    this_week_orders INTEGER,
+    next_week_orders INTEGER,
+	CONSTRAINT PK_COLLECTION_SLOT PRIMARY KEY (slot_no)
+);
+
+CREATE TABLE CART(
+	cart_no INTEGER NOT NULL,
+	user_id INTEGER,
+	CONSTRAINT PK_CART PRIMARY KEY (cart_no),
+	FOREIGN KEY (user_id) REFERENCES USERS (user_id)
+);
+
+CREATE TABLE PAYMENT(
+	payment_id INTEGER NOT NULL,
+	payment_status VARCHAR(50),
+	payment_type VARCHAR(50),
+	payment_date_time TIMESTAMP,
+	payment_amount REAL,
+	user_id INTEGER,
+	CONSTRAINT PK_PAYMENT PRIMARY KEY (payment_id),
+	FOREIGN KEY (user_id) REFERENCES USERS (user_id)
+);
+
+
+CREATE TABLE CATEGORY(
+	cat_id INTEGER NOT NULL,
+	cat_name VARCHAR(50),
+	cat_image VARCHAR(50),
+	CONSTRAINT PK_CATEGORY PRIMARY KEY (cat_id)
+);
+
+CREATE TABLE SHOP(
+	shop_id INTEGER NOT NULL,
+	shop_name VARCHAR(50),
+	shop_location VARCHAR(50),
+	trader_id INTEGER,
+	CONSTRAINT PK_SHOP PRIMARY KEY (shop_id),
+	FOREIGN KEY (trader_id) REFERENCES USERS (user_id)
+);
+
+CREATE TABLE PRODUCT(
+	product_id INTEGER NOT NULL,
+	product_name VARCHAR(50),
+	product_type VARCHAR(50),
+	product_price REAL,
+	product_image1 VARCHAR(50),
+	product_image2 VARCHAR(50),
+	product_image3 VARCHAR(50),
+	product_description VARCHAR(500),
+	allergy_information VARCHAR(300),
+	stock_available INTEGER NOT NULL,
+	min_order INTEGER NOT NULL,
+	max_order INTEGER NOT NULL,
+	cat_id INTEGER,
+	shop_id INTEGER,
+	CONSTRAINT PK_PRODUCT PRIMARY KEY (product_id),
+	FOREIGN KEY (cat_id) REFERENCES CATEGORY (cat_id),
+	FOREIGN KEY (shop_id) REFERENCES SHOP (shop_id)
+);
+
+CREATE TABLE DISCOUNT(
+	discount_id INTEGER NOT NULL,
+	discount_name VARCHAR(50),
+	discount_percent INTEGER,
+	user_id INTEGER,
+	product_id INTEGER,
+	CONSTRAINT PK_DISCOUNT PRIMARY KEY (discount_id),
+	FOREIGN KEY (product_id) REFERENCES PRODUCT (product_id),
+	FOREIGN KEY (user_id) REFERENCES USERS (user_id)
+);
+
+CREATE TABLE REVIEW(
+	review_id INTEGER NOT NULL,
+	review_date date,
+	rating INTEGER,
+	review_description VARCHAR(500),
+	product_id INTEGER,
+	user_id INTEGER,
+	CONSTRAINT PK_REVIEW PRIMARY KEY (review_id),
+	FOREIGN KEY (product_id) REFERENCES PRODUCT (product_id),
+	FOREIGN KEY (user_id) REFERENCES USERS (user_id)
+);
+
+CREATE TABLE ORDERS(
+	invoice_no INTEGER NOT NULL,
+	order_status VARCHAR(50),
+	order_date TIMESTAMP,
+	user_id INTEGER,
+	slot_no INTEGER,
+    collection_date DATE,
+	payment_id INTEGER,
+	CONSTRAINT PK_ORDERS PRIMARY KEY (invoice_no),
+	FOREIGN KEY (user_id) REFERENCES USERS (user_id),
+	FOREIGN KEY (slot_no) REFERENCES COLLECTION_SLOT (slot_no),
+	FOREIGN KEY (payment_id) REFERENCES PAYMENT (payment_id)
+);
+
+CREATE TABLE PRODUCT_CART(
+	product_id INTEGER NOT NULL,
+	cart_no INTEGER NOT NULL,
+    quantity INTEGER,
+    CONSTRAINT PK_PRODUCT_CATEGORY PRIMARY KEY (product_id, cart_no),
+	FOREIGN KEY (product_id) REFERENCES PRODUCT (product_id),
+	FOREIGN KEY (cart_no) REFERENCES CART (cart_no)
+);
+
+
+CREATE TABLE ORDER_DETAILS (
+    detail_id INTEGER NOT NULL,
+    invoice_no INTEGER, 
+    product_id INTEGER,
+    product_img VARCHAR(100), 
+    product_name VARCHAR(100),
+    unit_price REAL,
+    product_quantity INTEGER,
+    sub_total REAL,
+    CONSTRAINT PK_ORDER_DETAILS PRIMARY KEY (detail_id),
+    FOREIGN KEY (product_id) REFERENCES PRODUCT (product_id),
+    FOREIGN KEY (invoice_no) REFERENCES ORDERS (invoice_no)
+);
+
+
+CREATE TABLE TEMP_CHECKOUT (
+    temp_id INTEGER NOT NULL,
+    product_id INTEGER,
+    product_img VARCHAR(100), 
+    product_name VARCHAR(100),
+    unit_price REAL,
+    product_quantity INTEGER,
+    sub_total REAL,
+    user_id INTEGER NOT NULL,
+    CONSTRAINT PK_TEMP_CHECKOUT PRIMARY KEY (temp_id),
+    FOREIGN KEY (user_id) REFERENCES USERS (user_id)
+);
+
+
+CREATE SEQUENCE USERS_sequence;
+CREATE SEQUENCE COLLECTION_SLOT_sequence;
+CREATE SEQUENCE PAYMENT_sequence;
+CREATE SEQUENCE CATEGORY_sequence;
+CREATE SEQUENCE SHOP_sequence;
+CREATE SEQUENCE PRODUCT_sequence;
+CREATE SEQUENCE DISCOUNT_sequence;
+CREATE SEQUENCE REVIEW_sequence;
+CREATE SEQUENCE ORDERS_sequence;
+CREATE SEQUENCE PRODUCT_CART_sequence;
+CREATE SEQUENCE ORDER_DETAILS_sequence;
+CREATE SEQUENCE TEMP_CHECKOUT_sequence;
+
+
+CREATE OR REPLACE TRIGGER USERS_on_insert
+  BEFORE INSERT ON USERS
+  FOR EACH ROW
+BEGIN
+  SELECT USERS_sequence.nextval
+  INTO :new.user_id
+  FROM dual;
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER COLLECTION_SLOT_on_insert
+  BEFORE INSERT ON COLLECTION_SLOT
+  FOR EACH ROW
+BEGIN
+  SELECT COLLECTION_SLOT_sequence.nextval
+  INTO :new.slot_no
+  FROM dual;
+END;
+/
+
+CREATE OR REPLACE TRIGGER PAYMENT_on_insert
+  BEFORE INSERT ON PAYMENT
+  FOR EACH ROW
+BEGIN
+  SELECT PAYMENT_sequence.nextval
+  INTO :new.payment_id
+  FROM dual;
+END;
+/
+
+CREATE OR REPLACE TRIGGER CATEGORY_on_insert
+  BEFORE INSERT ON CATEGORY
+  FOR EACH ROW
+BEGIN
+  SELECT CATEGORY_sequence.nextval
+  INTO :new.cat_id
+  FROM dual;
+END;
+/
+
+CREATE OR REPLACE TRIGGER SHOP_on_insert
+  BEFORE INSERT ON SHOP
+  FOR EACH ROW
+BEGIN
+  SELECT SHOP_sequence.nextval
+  INTO :new.shop_id
+  FROM dual;
+END;
+/
+
+CREATE OR REPLACE TRIGGER PRODUCT_on_insert
+  BEFORE INSERT ON PRODUCT
+  FOR EACH ROW
+BEGIN
+  SELECT PRODUCT_sequence.nextval
+  INTO :new.product_id
+  FROM dual;
+END;
+/
+
+CREATE OR REPLACE TRIGGER DISCOUNT_on_insert
+  BEFORE INSERT ON DISCOUNT
+  FOR EACH ROW
+BEGIN
+  SELECT DISCOUNT_sequence.nextval
+  INTO :new.discount_id
+  FROM dual;
+END;
+/
+
+CREATE OR REPLACE TRIGGER REVIEW_on_insert
+  BEFORE INSERT ON REVIEW
+  FOR EACH ROW
+BEGIN
+  SELECT REVIEW_sequence.nextval
+  INTO :new.review_id
+  FROM dual;
+END;
+/
+
+CREATE OR REPLACE TRIGGER ORDERS_on_insert
+  BEFORE INSERT ON ORDERS
+  FOR EACH ROW
+BEGIN
+  SELECT ORDERS_sequence.nextval
+  INTO :new.invoice_no
+  FROM dual;
+END;
+/
+
+CREATE OR REPLACE TRIGGER ORDER_DETAILS_on_insert
+  BEFORE INSERT ON ORDER_DETAILS
+  FOR EACH ROW
+BEGIN
+  SELECT ORDER_DETAILS_sequence.nextval
+  INTO :new.detail_id
+  FROM dual;
+END;
+/
+
+CREATE OR REPLACE TRIGGER TEMP_CHECKOUT_on_insert
+  BEFORE INSERT ON TEMP_CHECKOUT
+  FOR EACH ROW
+BEGIN
+  SELECT TEMP_CHECKOUT_sequence.nextval
+  INTO :new.temp_id
+  FROM dual;
+END;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+

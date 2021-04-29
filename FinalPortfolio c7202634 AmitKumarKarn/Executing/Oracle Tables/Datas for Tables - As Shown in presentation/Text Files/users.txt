@@ -1,0 +1,30 @@
+DROP TABLE USERS CASCADE CONSTRAINTS;
+DROP SEQUENCE USERS_sequence;
+
+CREATE TABLE USERS(	
+	user_id INTEGER NOT NULL,
+	username VARCHAR(50) NOT NULL,
+	user_type VARCHAR(50) NOT NULL,
+	added_by INTEGER,
+	fullname VARCHAR(100),
+	user_image VARCHAR(80),
+	user_contact LONG,
+	user_email VARCHAR(50) NOT NULL,
+	password VARCHAR(80) NOT NULL,
+    verification_status INTEGER,
+    trader_request INTEGER,
+	CONSTRAINT PK_USERS PRIMARY KEY (user_id),
+	FOREIGN KEY (added_by) REFERENCES USERS (user_id)
+);
+
+CREATE SEQUENCE USERS_sequence;
+
+CREATE OR REPLACE TRIGGER USERS_on_insert
+  BEFORE INSERT ON USERS
+  FOR EACH ROW
+BEGIN
+  SELECT USERS_sequence.nextval
+  INTO :new.user_id
+  FROM dual;
+END;
+/

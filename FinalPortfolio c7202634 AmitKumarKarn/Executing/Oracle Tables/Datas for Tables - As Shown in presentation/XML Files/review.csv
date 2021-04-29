@@ -1,0 +1,7 @@
+"Column Name","Data Type","Nullable","Default","Primary Key"
+"REVIEW_ID","NUMBER","No","","1"
+"REVIEW_DATE","DATE","Yes","",""
+"RATING","NUMBER","Yes","",""
+"REVIEW_DESCRIPTION","VARCHAR2(500)","Yes","",""
+"PRODUCT_ID","NUMBER","Yes","",""
+"USER_ID","NUMBER","Yes","",""

@@ -1,0 +1,29 @@
+DROP TABLE TEMP_CHECKOUT CASCADE CONSTRAINTS;
+DROP SEQUENCE TEMP_CHECKOUT_sequence;
+
+
+CREATE TABLE TEMP_CHECKOUT (
+    temp_id INTEGER NOT NULL,
+    product_id INTEGER,
+    product_img VARCHAR(100), 
+    product_name VARCHAR(100),
+    unit_price REAL,
+    product_quantity INTEGER,
+    sub_total REAL,
+    user_id INTEGER NOT NULL,
+    CONSTRAINT PK_TEMP_CHECKOUT PRIMARY KEY (temp_id),
+    FOREIGN KEY (user_id) REFERENCES USERS (user_id)
+);
+
+CREATE SEQUENCE TEMP_CHECKOUT_sequence;
+
+CREATE OR REPLACE TRIGGER TEMP_CHECKOUT_on_insert
+  BEFORE INSERT ON TEMP_CHECKOUT
+  FOR EACH ROW
+BEGIN
+  SELECT TEMP_CHECKOUT_sequence.nextval
+  INTO :new.temp_id
+  FROM dual;
+END;
+/
+

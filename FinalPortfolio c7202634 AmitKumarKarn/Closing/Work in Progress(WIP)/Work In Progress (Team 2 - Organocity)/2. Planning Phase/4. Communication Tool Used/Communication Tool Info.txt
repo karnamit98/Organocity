@@ -1,0 +1,4 @@
+For remote communication, our group used an app called Slack. This app was available both in smartphones 
+as well as desktop PCs. Two groups were created in this application.
+One group called storage_amaze where all the files were transferred during the project development phase.
+The other group called general where all the basic chats and discussions took place.

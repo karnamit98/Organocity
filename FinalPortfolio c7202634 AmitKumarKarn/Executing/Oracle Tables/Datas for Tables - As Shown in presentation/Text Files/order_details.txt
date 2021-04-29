@@ -1,0 +1,29 @@
+DROP TABLE ORDER_DETAILS CASCADE CONSTRAINTS;
+DROP SEQUENCE ORDER_DETAILS_sequence;
+
+
+CREATE TABLE ORDER_DETAILS (
+    detail_id INTEGER NOT NULL,
+    invoice_no INTEGER, 
+    product_id INTEGER,
+    product_img VARCHAR(100), 
+    product_name VARCHAR(100),
+    unit_price REAL,
+    product_quantity INTEGER,
+    sub_total REAL,
+    CONSTRAINT PK_ORDER_DETAILS PRIMARY KEY (detail_id),
+    FOREIGN KEY (product_id) REFERENCES PRODUCT (product_id),
+    FOREIGN KEY (invoice_no) REFERENCES ORDERS (invoice_no)
+);
+
+CREATE SEQUENCE ORDER_DETAILS_sequence;
+
+CREATE OR REPLACE TRIGGER ORDER_DETAILS_on_insert
+  BEFORE INSERT ON ORDER_DETAILS
+  FOR EACH ROW
+BEGIN
+  SELECT ORDER_DETAILS_sequence.nextval
+  INTO :new.detail_id
+  FROM dual;
+END;
+/

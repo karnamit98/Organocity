@@ -1,0 +1,6 @@
+"Column Name","Data Type","Nullable","Default","Primary Key"
+"DISCOUNT_ID","NUMBER","No","","1"
+"DISCOUNT_NAME","VARCHAR2(50)","Yes","",""
+"DISCOUNT_PERCENT","NUMBER","Yes","",""
+"USER_ID","NUMBER","Yes","",""
+"PRODUCT_ID","NUMBER","Yes","",""
